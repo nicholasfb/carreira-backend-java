@@ -8,13 +8,17 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         Random rand = new Random();
-
+        int quadra = 0,quina = 0;
         List<Integer> listaNumerosMega = new ArrayList<>();
 
         System.out.println("Gerando números da MegaSena");
-        for (int i = 0; i < 6; i++) {
-            listaNumerosMega.add(rand.nextInt(100) + 1);
+        while (listaNumerosMega.size() < 6) {
+            int numero = rand.nextInt(60) + 1;
+            if (!listaNumerosMega.contains(numero)) {
+                listaNumerosMega.add(numero);
+            }
         }
+
 
         Collections.sort(listaNumerosMega);
 
@@ -22,26 +26,44 @@ public class Main {
         int qtdTentativas = 0;
         boolean venceu = false;
         while(!venceu){
-
+            List<Integer> listaNumerosAcertados = new ArrayList<>();
             List<Integer> listaNumerosPalpite = new ArrayList<>();
-            for (int i = 0; i < 6; i++) {
-                listaNumerosPalpite.add(rand.nextInt(100) + 1);
+            while (listaNumerosPalpite.size() < 6) {
+                int numero = rand.nextInt(60) + 1;
+                if (!listaNumerosPalpite.contains(numero)) {
+                    listaNumerosPalpite.add(numero);
+                    if(listaNumerosMega.contains(numero)) {
+                        listaNumerosAcertados.add(numero);
+                    }
+                }
+
+
             }
 
             Collections.sort(listaNumerosPalpite);
-
-            System.out.println("Números da Mega Sena: " + listaNumerosMega);
+            Collections.sort(listaNumerosAcertados);
+            System.out.println("\nNúmeros da Mega Sena: " + listaNumerosMega);
             System.out.println("Números do palpite: " + listaNumerosPalpite);
+            System.out.println("Números acertados: " + listaNumerosAcertados);
 
-            if(listaNumerosPalpite.equals(listaNumerosMega)) {
+            if(listaNumerosAcertados.size() == 4) {
+                System.out.println("Parabéns você levou a QUADRA");
+                quadra++;
+            } else if(listaNumerosAcertados.size() == 5) {
+                System.out.println("Parabéns você levou a QUINA");
+                quina++;
+            } else if(listaNumerosAcertados.size() == 6) {
                 System.out.println("\nVocê é o vencedora da Mega Sena");
                 venceu = true;
             } else {
-                System.out.println("\nVocê não acertou os números");
+                System.out.println("Você não levou nenhum prêmio");
             }
+
             qtdTentativas++;
-            System.out.println("Tentativa número " + qtdTentativas);
-            Thread.sleep(500);
+            System.out.println("\nTentativa número " + qtdTentativas);
+            System.out.println("Quadras acertadas: " + quadra);
+            System.out.println("Quinas acertadas: " + quina);
+            //Thread.sleep(1);
         }
     }
 }
