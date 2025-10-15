@@ -1,8 +1,12 @@
-package br.com.alura.screenmatch.modelos;
+package modelos;
+
+import com.google.gson.annotations.SerializedName;
 
 public class Titulo implements Comparable<Titulo> {
     private String nome;
     private int anoDeLancamento;
+    private String genero;
+    private String diretor;
     private boolean incluidoNoPlano;
     private double somaDasAvaliacoes;
     private int totalDeAvaliacoes;
@@ -15,6 +19,30 @@ public class Titulo implements Comparable<Titulo> {
     public Titulo(String nome, int anoDeLancamento) {
         this.nome = nome;
         this.anoDeLancamento = anoDeLancamento;
+    }
+
+    public Titulo(TituloOmdb meuTituloOmdb) {
+        this.nome = meuTituloOmdb.title();
+        this.anoDeLancamento = Integer.valueOf(meuTituloOmdb.year());
+        this.duracaoEmMinutos = Integer.valueOf(meuTituloOmdb.runtime().replaceAll("\\D+", ""));
+        this.genero = meuTituloOmdb.genre();
+        this.diretor = meuTituloOmdb.director();
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getDiretor() {
+        return diretor;
+    }
+
+    public void setDiretor(String diretor) {
+        this.diretor = diretor;
     }
 
     public String getNome() {
@@ -56,6 +84,9 @@ public class Titulo implements Comparable<Titulo> {
     public void exibeFichaTecnica() {
         System.out.println("Nome do filme: " + nome);
         System.out.println("Ano de lançamento: " + anoDeLancamento);
+        System.out.println("Duração em minutos: " + duracaoEmMinutos);
+        System.out.println("Gênero: " + genero);
+        System.out.println("Diretor: " + diretor);
     }
 
     public void avalia(double nota) {

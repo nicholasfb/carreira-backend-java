@@ -1,4 +1,4 @@
-package br.com.alura.screenmatch.modelos;
+package modelos;
 
 public class CurtaMetragem extends Filme{
 
