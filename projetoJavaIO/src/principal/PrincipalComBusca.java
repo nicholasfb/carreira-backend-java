@@ -18,7 +18,7 @@ public class PrincipalComBusca {
         Scanner rd = new Scanner(System.in);
         System.out.println("Digite um filme para buscar: ");
         String buscaFilme = rd.nextLine().replace(" ", "%20");
-        String endereco = "http://www.omdbapi.com/?t=" + buscaFilme + "&apikey=";
+        String endereco = "http://www.omdbapi.com/?t=" + buscaFilme + "";
         HttpClient client = HttpClient.newHttpClient();
 
         //HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://parallelum.com.br/fipe/api/v1/carros/marcas/56/modelos").build();
@@ -36,7 +36,13 @@ public class PrincipalComBusca {
 
         TituloOmdb meuTituloOmdb = gson.fromJson(json, TituloOmdb.class);
         System.out.println(meuTituloOmdb);
-        Titulo meuTitulo = new Titulo(meuTituloOmdb);
-        meuTitulo.exibeFichaTecnica();
+
+        try {
+            Titulo meuTitulo = new Titulo(meuTituloOmdb);
+            meuTitulo.exibeFichaTecnica();
+        } catch (NumberFormatException e){
+            System.out.println("Aconteceu um erro!");
+            System.out.println(e.getMessage());
+        }
     }
 }
