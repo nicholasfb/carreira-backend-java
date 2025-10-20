@@ -3,6 +3,7 @@ package principal;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import exceptions.ErroDeConversaoDeAnoException;
 import modelos.Titulo;
 import modelos.TituloOmdb;
 
@@ -18,29 +19,30 @@ public class PrincipalComBusca {
         Scanner rd = new Scanner(System.in);
         System.out.println("Digite um filme para buscar: ");
         String buscaFilme = rd.nextLine().replace(" ", "%20");
-        String endereco = "http://www.omdbapi.com/?t=" + buscaFilme + "";
-        HttpClient client = HttpClient.newHttpClient();
-
-        //HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://parallelum.com.br/fipe/api/v1/carros/marcas/56/modelos").build();
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(endereco))
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        String json = response.body();
-        System.out.println(json);
-
-        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
-
-        TituloOmdb meuTituloOmdb = gson.fromJson(json, TituloOmdb.class);
-        System.out.println(meuTituloOmdb);
-
+        String endereco = "http://www.omdbapi.com/?t=" + buscaFilme + "&apikey=";
         try {
+            HttpClient client = HttpClient.newHttpClient();
+
+            //HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://parallelum.com.br/fipe/api/v1/carros/marcas/56/modelos").build();
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(endereco))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            String json = response.body();
+            System.out.println(json);
+
+            Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
+
+            TituloOmdb meuTituloOmdb = gson.fromJson(json, TituloOmdb.class);
+            System.out.println(meuTituloOmdb);
+
+
             Titulo meuTitulo = new Titulo(meuTituloOmdb);
             meuTitulo.exibeFichaTecnica();
-        } catch (NumberFormatException e){
+        } catch (ErroDeConversaoDeAnoException e){
             System.out.println("Aconteceu um erro!");
             System.out.println(e.getMessage());
         }
