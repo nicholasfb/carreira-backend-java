@@ -1,0 +1,22 @@
+[
+  {
+    "Nome": "Avatar",
+    "AnoDeLancamento": 2009,
+    "Genero": "Action, Adventure, Fantasy",
+    "Diretor": "James Cameron",
+    "IncluidoNoPlano": false,
+    "SomaDasAvaliacoes": 0.0,
+    "TotalDeAvaliacoes": 0,
+    "DuracaoEmMinutos": 162
+  },
+  {
+    "Nome": "Signs",
+    "AnoDeLancamento": 2002,
+    "Genero": "Drama, Mystery, Sci-Fi",
+    "Diretor": "M. Night Shyamalan",
+    "IncluidoNoPlano": false,
+    "SomaDasAvaliacoes": 0.0,
+    "TotalDeAvaliacoes": 0,
+    "DuracaoEmMinutos": 106
+  }
+]

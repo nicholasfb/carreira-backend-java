@@ -85,12 +85,25 @@ public class Titulo implements Comparable<Titulo> {
         return totalDeAvaliacoes;
     }
 
-    public void exibeFichaTecnica() {
-        System.out.println("Nome do filme: " + nome);
-        System.out.println("Ano de lançamento: " + anoDeLancamento);
-        System.out.println("Duração em minutos: " + duracaoEmMinutos);
-        System.out.println("Gênero: " + genero);
-        System.out.println("Diretor: " + diretor);
+    public String exibeFichaTecnica() {
+        return  """
+                Nome do filme: %s
+                Ano de Lançamento: %d
+                Duração em minutos: %d
+                Gênero: %s
+                Diretor: %s
+                """.formatted(nome, anoDeLancamento, duracaoEmMinutos, genero, diretor);
+    }
+
+    @Override
+    public String toString() {
+        return "Titulo{" +
+                "nome='" + nome + '\'' +
+                ", anoDeLancamento=" + anoDeLancamento +
+                ", duracaoEmMinutos=" + duracaoEmMinutos +
+                ", genero='" + genero + '\'' +
+                ", diretor='" + diretor + '\'' +
+                '}';
     }
 
     public void avalia(double nota) {
